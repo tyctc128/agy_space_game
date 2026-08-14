@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="description" content="RWD Space Invaders Web Game built with Canvas & Web Audio API">
+  <title>Space Defender - RWD Space Invaders</title>
+  
+  <!-- Retro Pixel Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Orientation Prompt Overlay for Mobile Portrait -->
+  <div id="orientation-warning" class="orientation-modal hidden">
+    <div class="orientation-content">
+      <div class="rotate-icon">↻</div>
+      <h2>Rotate Your Device</h2>
+      <p>Best played in landscape mode.</p>
+    </div>
+  </div>
+
+  <div id="game-container">
+    
+    <!-- Header Control Bar -->
+    <header class="game-header">
+      <div class="brand-title">SPACE DEFENDER</div>
+      <div class="top-controls">
+        <button id="toggle-touch-btn" class="icon-btn" aria-label="Toggle Touch Controls" title="Toggle Virtual Controller">🎮 Touch UI</button>
+        <button id="sound-btn" class="icon-btn" aria-label="Toggle Sound" title="Sound On/Off">🔊 Sound</button>
+        <button id="pause-btn" class="icon-btn" aria-label="Pause Game" title="Pause (P)">⏸ Pause</button>
+      </div>
+    </header>
+
+    <!-- Main Canvas Viewport -->
+    <div class="canvas-wrapper">
+      <canvas id="game-canvas" width="960" height="600"></canvas>
+    </div>
+
+    <!-- Mobile Virtual Touch Controller -->
+    <div id="touch-controls" class="touch-controller hidden">
+      <!-- Left D-Pad -->
+      <div class="dpad-container">
+        <button id="btn-up" class="dpad-btn dpad-up" aria-label="Move Up">▲</button>
+        <div class="dpad-middle">
+          <button id="btn-left" class="dpad-btn dpad-left" aria-label="Move Left">◀</button>
+          <div class="dpad-center"></div>
+          <button id="btn-right" class="dpad-btn dpad-right" aria-label="Move Right">▶</button>
+        </div>
+        <button id="btn-down" class="dpad-btn dpad-down" aria-label="Move Down">▼</button>
+      </div>
+
+      <!-- Right Action Button -->
+      <div class="action-container">
+        <button id="btn-fire" class="fire-btn" aria-label="Fire Weapon">FIRE</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

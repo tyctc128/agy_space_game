@@ -1,0 +1,309 @@
+/* ==========================================================================
+   Space Defender - RWD Space Invaders Style Sheet
+   ========================================================================== */
+
+:root {
+  --bg-color: #0b0726;
+  --panel-bg: rgba(20, 15, 45, 0.85);
+  --primary-color: #00ffcc;
+  --secondary-color: #ff0055;
+  --accent-color: #ffe600;
+  --text-color: #ffffff;
+  --font-family: 'Press Start 2P', monospace, sans-serif;
+  
+  /* Safe area inset variables for notch / dynamic island devices */
+  --sat: env(safe-area-inset-top, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+  --sal: env(safe-area-inset-left, 0px);
+  --sar: env(safe-area-inset-right, 0px);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: var(--font-family);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sat) var(--sar) var(--sab) var(--sal);
+  background: radial-gradient(circle at center, #18103c 0%, #08041a 100%);
+}
+
+/* --------------------------------------------------------------------------
+   Game Container & Header
+   -------------------------------------------------------------------------- */
+#game-container {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  height: 100vh;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+}
+
+.game-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 12px;
+  background: var(--panel-bg);
+  border: 2px solid #3d2b7a;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+.brand-title {
+  font-size: 14px;
+  color: var(--primary-color);
+  text-shadow: 0 0 8px rgba(0, 255, 204, 0.6);
+  letter-spacing: 1px;
+}
+
+.top-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.icon-btn {
+  background: #251b54;
+  color: #fff;
+  border: 2px solid #5742a9;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-family: var(--font-family);
+  font-size: 10px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.icon-btn:hover, .icon-btn:active {
+  background: #443293;
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  transform: translateY(-1px);
+}
+
+/* --------------------------------------------------------------------------
+   Canvas Wrapper & Pixel-Art Rendering
+   -------------------------------------------------------------------------- */
+.canvas-wrapper {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin: 6px 0;
+}
+
+#game-canvas {
+  width: 100%;
+  height: auto;
+  max-width: 960px;
+  max-height: calc(100vh - 170px);
+  object-fit: contain;
+  background-color: #060317;
+  border: 3px solid #4a3496;
+  border-radius: 6px;
+  box-shadow: 0 0 25px rgba(118, 77, 255, 0.25);
+  
+  /* Retain sharp pixel art edges */
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  -ms-interpolation-mode: nearest-neighbor;
+}
+
+/* --------------------------------------------------------------------------
+   Touch Controller Layout (RWD Mobile / Tablet)
+   -------------------------------------------------------------------------- */
+.touch-controller {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 4px 12px 8px 12px;
+  z-index: 20;
+  touch-action: none;
+}
+
+/* D-Pad Grid */
+.dpad-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dpad-middle {
+  display: flex;
+  align-items: center;
+}
+
+.dpad-center {
+  width: 44px;
+  height: 44px;
+  background: #181236;
+}
+
+.dpad-btn {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(145deg, #372a73, #22184d);
+  border: 2px solid #5f48b8;
+  color: var(--primary-color);
+  font-family: var(--font-family);
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  touch-action: none;
+}
+
+.dpad-up { border-radius: 8px 8px 0 0; }
+.dpad-down { border-radius: 0 0 8px 8px; }
+.dpad-left { border-radius: 8px 0 0 8px; }
+.dpad-right { border-radius: 0 8px 8px 0; }
+
+.dpad-btn:active, .dpad-btn.active {
+  background: #00ffcc;
+  color: #000;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Action Button */
+.action-container {
+  display: flex;
+  align-items: center;
+}
+
+.fire-btn {
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ff1a66 0%, #b3003b 100%);
+  border: 4px solid #ff6699;
+  color: #ffffff;
+  font-family: var(--font-family);
+  font-size: 14px;
+  letter-spacing: 1px;
+  box-shadow: 0 6px 15px rgba(255, 0, 85, 0.4);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: none;
+}
+
+.fire-btn:active, .fire-btn.active {
+  background: radial-gradient(circle, #ffe600 0%, #ff9900 100%);
+  border-color: #ffff99;
+  color: #000000;
+  transform: scale(0.95);
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* --------------------------------------------------------------------------
+   Orientation Prompt Overlay
+   -------------------------------------------------------------------------- */
+.orientation-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(8, 4, 26, 0.95);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  backdrop-filter: blur(8px);
+}
+
+.orientation-content {
+  padding: 30px;
+  border: 3px solid var(--secondary-color);
+  border-radius: 12px;
+  background: #150d36;
+  box-shadow: 0 0 30px rgba(255, 0, 85, 0.3);
+}
+
+.rotate-icon {
+  font-size: 48px;
+  color: var(--accent-color);
+  margin-bottom: 16px;
+  animation: rotateAnim 2s infinite linear;
+}
+
+@keyframes rotateAnim {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(90deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.orientation-content h2 {
+  font-size: 16px;
+  color: var(--secondary-color);
+  margin-bottom: 12px;
+}
+
+.orientation-content p {
+  font-size: 11px;
+  color: #aaa;
+  line-height: 1.6;
+}
+
+/* Helper Utilities */
+.hidden {
+  display: none !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .brand-title {
+    font-size: 10px;
+  }
+  .icon-btn {
+    padding: 4px 6px;
+    font-size: 8px;
+  }
+  .dpad-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 12px;
+  }
+  .dpad-center {
+    width: 36px;
+    height: 36px;
+  }
+  .fire-btn {
+    width: 72px;
+    height: 72px;
+    font-size: 12px;
+  }
+}
